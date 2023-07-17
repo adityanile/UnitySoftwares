@@ -35,7 +35,7 @@ public class CheckLogin : MonoBehaviour
         Debug.Log("Current User:- " + name.text + "ID:- " + id.text);
     }
 
-    void SaveToJson()
+    protected void SaveToJson()
     {
         SaveData demouser = new SaveData();   // demouser is new instance to the class savedata
 
@@ -43,7 +43,7 @@ public class CheckLogin : MonoBehaviour
         demouser.id = id.text;
 
         string json = JsonUtility.ToJson(demouser);   // Here created a json string
-        File.WriteAllText(Application.dataPath + "/logindata.json", json);  // here we wrote a string to json file
+        File.AppendAllText(Application.dataPath + "/logindata.json", json);  // here we wrote a string to json file
 
          Debug.Log("Data Saved Successfully At " + Application.dataPath);
 

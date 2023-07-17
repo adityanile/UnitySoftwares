@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class ProgramManager : MonoBehaviour
 {
@@ -81,6 +82,8 @@ public class ProgramManager : MonoBehaviour
 
             MainManager.instance.timetaken = timer;
 
+            SaveDataToJson();
+
             Debug.Log("Submitted Succcessfully");
             SceneManager.LoadScene(2);     // Load scene 3 final scene
 
@@ -100,9 +103,29 @@ public class ProgramManager : MonoBehaviour
     private void UpdateTimer()
     {
         timer += Time.deltaTime;
-        time.text = "Time:- " + Convert.ToString( (Convert.ToInt64( timer )) );   //UI Output
+        time.text = "Time:- " + Convert.ToString((Convert.ToInt64(timer)));   //UI Output
     }
 
+    public void SaveDataToJson()
+    {
+        SetData demo = new SetData();
 
+        demo.solution1 = MainManager.instance.solution1;
+        demo.solution2 = MainManager.instance.solution2;
+        demo.solution3 = MainManager.instance.solution3;
+        demo.timetaken = MainManager.instance.timetaken;
 
+        string json = JsonUtility.ToJson(demo);
+        File.AppendAllText(Application.dataPath + "/logindata.json", json);
+
+    }
+
+}
+
+public class SetData
+{
+   public string solution1;
+   public string solution2;
+   public string solution3;
+   public float  timetaken;
 }
