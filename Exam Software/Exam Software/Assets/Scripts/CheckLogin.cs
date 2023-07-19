@@ -20,7 +20,6 @@ public class CheckLogin : MonoBehaviour
     public void OnClickStart()
     {
         SetDetails(); 
-        SaveToJson();
         SceneManager.LoadScene(1);
     }
 
@@ -35,27 +34,6 @@ public class CheckLogin : MonoBehaviour
         Debug.Log("Current User:- " + name.text + "ID:- " + id.text);
     }
 
-    protected void SaveToJson()
-    {
-        SaveData demouser = new SaveData();   // demouser is new instance to the class savedata
-
-        demouser.name = name.text;
-        demouser.id = id.text;
-
-        string json = JsonUtility.ToJson(demouser);   // Here created a json string
-        File.AppendAllText(Application.dataPath + "/logindata.json", json);  // here we wrote a string to json file
-
-         Debug.Log("Data Saved Successfully At " + Application.dataPath);
-
-    }
-
-}
-
-[System.Serializable]
-public class SaveData
-{
-    public string name;
-    public string id;
 }
 
 

@@ -108,24 +108,34 @@ public class ProgramManager : MonoBehaviour
 
     public void SaveDataToJson()
     {
-        SetData demo = new SetData();
+        SetData student = new SetData();
 
-        demo.solution1 = MainManager.instance.solution1;
-        demo.solution2 = MainManager.instance.solution2;
-        demo.solution3 = MainManager.instance.solution3;
-        demo.timetaken = MainManager.instance.timetaken;
+        student.name = MainManager.instance.name;
+        student.id = MainManager.instance.id;
 
-        string json = JsonUtility.ToJson(demo);
-        File.AppendAllText(Application.dataPath + "/logindata.json", json);
+        student.solution1 = MainManager.instance.solution1;
+        student.solution2 = MainManager.instance.solution2;
+        student.solution3 = MainManager.instance.solution3;
+        student.timetaken = MainManager.instance.timetaken;
+
+        string json = JsonUtility.ToJson(student, true);
+        Debug.Log(json);
+
+        File.AppendAllText("D:/UNITY/Unity Softwares/logindata.json", json);
+
+        Debug.Log("Data Saved Successfully");
 
     }
 
 }
 
+[System.Serializable]
 public class SetData
 {
-   public string solution1;
-   public string solution2;
-   public string solution3;
-   public float  timetaken;
+    public string name;
+    public string id;
+    public string solution1;
+    public string solution2;
+    public string solution3;
+    public float timetaken;
 }
